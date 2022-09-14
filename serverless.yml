@@ -1,0 +1,67 @@
+service: aws-lambda-apr
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  stage: prod
+  region: us-east-1
+
+functions:
+  createMeter:
+    handler: app/index.meterCreate
+    events:
+      - http:
+          path: meter
+          method: post
+          cors: true
+  updateMeter:
+    handler: app/index.meterUpdate
+    events:
+      - http:
+          path: meter/{id}
+          method: put
+          cors: true
+  getAllMeters:
+    handler: app/index.meterGetAll
+    events:
+      - http:
+          path: meter
+          method: get
+          cors: true
+  getAllClients:
+    handler: app/index.clientGetAll
+    events:
+      - http:
+          path: client
+          method: get
+          cors: true
+  createClient:
+    handler: app/index.clientCreate
+    events:
+      - http:
+          path: client
+          method: post
+          cors: true
+  createAccountByMeter:
+    handler: app/index.accountCreateByMeter
+    events:
+      - http:
+          path: account-by-meter
+          method: post
+          cors: true
+  createTariff:
+    handler: app/index.tariffCreate
+    events:
+      - http:
+          path: tariff
+          method: post
+          cors: true
