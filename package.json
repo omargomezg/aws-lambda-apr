@@ -1,22 +1,22 @@
 {
-  "name": "aws-lambda-apr",
-  "version": "1.0.0",
-  "description": "Functions for all process in chilean drinking water cooperative",
-  "main": "app/index.js",
-  "scripts": {
-    "test": "jest --watchAll"
-  },
-  "author": "Omar Gómez",
-  "license": "ISC",
-  "dependencies": {
-    "babel-loader": "^8.2.5",
-    "mongoose": "^6.6.0",
-    "mongoose-paginate-v2": "^1.7.1"
-  },
-  "devDependencies": {
-    "jest": "^29.0.2",
-    "serverless-offline": "^10.0.0",
-    "serverless-webpack": "^5.9.1",
-    "webpack-node-externals": "^3.0.0"
-  }
+    "name": "aws-lambda-apr",
+    "version": "1.0.0",
+    "description": "Functions for all process in chilean drinking water cooperative",
+    "main": "app/index.js",
+    "scripts": {
+        "test": "jest -t 'Get meters Get all'--watchAll"
+    },
+    "author": "Omar Gómez",
+    "license": "ISC",
+    "dependencies": {
+        "babel-loader": "^8.2.5",
+        "mongoose": "^6.6.0",
+        "mongoose-paginate-v2": "^1.7.1"
+    },
+    "devDependencies": {
+        "jest": "^29.0.3",
+        "serverless-offline": "^10.0.0",
+        "serverless-webpack": "^5.9.1",
+        "webpack-node-externals": "^3.0.0"
+    }
 }

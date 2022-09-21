@@ -1,36 +1,36 @@
 {
-  "body": {
-    "client": {
-      "dniType": "CHILEAN",
-      "dni": "60711143",
-      "fullName": "MARIA ASENJO CARO",
-      "names": "",
-      "middleName": null,
-      "lastName": null,
-      "businessName": null,
-      "businessActivity": null,
-      "birthDate": null,
-      "profession": "",
-      "dateOfAdmission": null,
-      "sector": 14,
-      "clientNumber": 2903,
-      "clientType": "NO_RESIDENT_PARTNER",
-      "email": null,
-      "telephone": null,
-      "isActive": true,
-      "waterMeters": [
-        {
-          "id": 251,
-          "serial": 2903,
-          "trademark": "S/m",
-          "diameter": "THIRTEEN",
-          "comment": "",
-          "sector": "UÑIHUE",
-          "updated": "2022-06-01T19:32:08.329+00:00",
-          "dni": null,
-          "dischargeDate": null
+    "body": {
+        "client": {
+            "dniType": "CHILEAN",
+            "dni": "60711143",
+            "fullName": "MARIA ASENJO CARO",
+            "names": "",
+            "middleName": null,
+            "lastName": null,
+            "businessName": null,
+            "businessActivity": null,
+            "birthDate": null,
+            "profession": "",
+            "dateOfAdmission": null,
+            "sector": 14,
+            "clientNumber": 2903,
+            "clientType": "NO_RESIDENT_PARTNER",
+            "email": null,
+            "telephone": null,
+            "isActive": true,
+            "waterMeters": [
+                {
+                    "id": 251,
+                    "serial": 2903,
+                    "trademark": "S/m",
+                    "diameter": "THIRTEEN",
+                    "comment": "",
+                    "sector": "UÑIHUE",
+                    "updated": "2022-06-01T19:32:08.329+00:00",
+                    "dni": null,
+                    "dischargeDate": null
+                }
+            ]
         }
-      ]
     }
-  }
 }

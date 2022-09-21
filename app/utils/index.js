@@ -1,3 +1,4 @@
 module.exports = {
-    handleResponse: require('./handleResponse')
+    handleResponse: require('./handleResponse'),
+    handlePagination: require('./handlePagination'),
 }

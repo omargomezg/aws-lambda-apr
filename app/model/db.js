@@ -7,7 +7,9 @@ const connectToDatabase = async () => {
         return Promise.resolve()
     }
 
-    const db = await mongoose.connect('mongodb+srv://gomez:I2jj0G91QthFo46K@cluster0.ijdbw.mongodb.net/voces?retryWrites=true&w=majority')
+    const db = await mongoose.connect(
+        'mongodb+srv://gomez:I2jj0G91QthFo46K@cluster0.ijdbw.mongodb.net/voces?retryWrites=true&w=majority'
+    )
     isConnected = db.connections[0].readyState
 }
 
