@@ -3,9 +3,18 @@ const MeterModel = require('../model/meter')
 const AccountModel = require('../model/account')
 const ClientModel = require('../model/client')
 const TariffModel = require('../model/tariff')
+const {handlePagination} = require("../utils");
 
 class TariffService {
     constructor() {}
+
+    async getAll(requestParams) {
+        await connectToDatabase()
+        return await TariffModel.paginate(
+            {},
+            handlePagination.getPagination(requestParams)
+        )
+    }
 
     async create(client) {
         await connectToDatabase()

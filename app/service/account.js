@@ -47,10 +47,13 @@ class AccountService {
 
     async getAll(requestParams) {
         await connectToDatabase()
+        const {_id} = requestParams
         const options = handlePagination.getPagination(requestParams);
+        let query = {}
+        if (_id)
+            query._id = _id
         options.populate = ['client', 'meter', 'tariff']
-        return await AccountModel.paginate({}, options)
-        // return await AccountModel.find().populate({path: 'client'}).exec();
+        return await AccountModel.paginate(query, options)
     }
 }
 

@@ -58,6 +58,13 @@ functions:
                   path: account-by-meter
                   method: post
                   cors: true
+    tariffGet:
+      handler: app/handle/tariff.getAll
+      events:
+        - http:
+            path: tariff
+            method: get
+            cors: true
     createTariff:
         handler: app/index.tariffCreate
         events:
