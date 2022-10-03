@@ -1,11 +1,29 @@
-const { handleResponse } = require('../utils')
-const AccountService = require('../service/account')
+const ClientService = require('../service/client')
+const {handleResponse} = require("../utils");
 
-const accountService = new AccountService()
+const clientService = new ClientService()
 
-module.exports.getAll = async (event, context) => {
+module.exports.createClient = async (event, context) => {
     try {
-        const result = await accountService.getAll(event.queryStringParameters)
+        const {client} = JSON.parse(event.body)
+        const result = []
+        result.push(await clientService.create(parseClient(client)))
+        return handleResponse.handleSuccess({message: result}, 200)
+    } catch (err) {
+        console.log(err)
+        return {
+            statusCode: err.statusCode || 500,
+            body: JSON.stringify({
+                error: err.message || 'An error has occurred.',
+            }),
+        }
+    }
+}
+
+module.exports.accountCreateByMeter = async (event, context) => {
+    try {
+        const {client} = JSON.parse(event.body)
+        const result = await accountService.createAccountByMeter(client)
         return handleResponse.handleSuccess(result, 200)
     } catch (err) {
         console.log(err)
@@ -18,26 +36,10 @@ module.exports.getAll = async (event, context) => {
     }
 }
 
-module.exports.create = async (event, context) => {
+module.exports.updateClient = async (event, context) => {
     try {
-        const account = JSON.parse(event.body)
-        const result = await accountService.create(account)
-        return handleResponse.handleSuccess(result, 200)
-    } catch (err) {
-        console.log(err)
-        return {
-            statusCode: err.statusCode || 500,
-            body: JSON.stringify({
-                error: err.message || 'An error has occurred.',
-            }),
-        }
-    }
-}
-
-module.exports.update = async (event, context) => {
-    try {
-        const account = JSON.parse(event.body)
-        const result = await accountService.update(account)
+        const client = JSON.parse(event.body)
+        const result = await clientService.update(client)
         return handleResponse.handleSuccess(result, 200)
     } catch (err) {
         console.log(err)

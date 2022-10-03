@@ -6,7 +6,20 @@ const TariffModel = require('../model/tariff')
 const { handlePagination } = require('../utils')
 
 class AccountService {
-    constructor() {}
+    constructor() {
+    }
+
+    async create(account) {
+        await connectToDatabase()
+        return await new AccountModel(account).save()
+    }
+
+    async update(account) {
+        await connectToDatabase()
+        const query = {_id: account._id}
+        return await AccountModel.findOneAndUpdate(query, account, {new: true})
+
+    }
 
     async createAccountByMeter(client) {
         await connectToDatabase()
@@ -52,7 +65,7 @@ class AccountService {
         let query = {}
         if (_id)
             query._id = _id
-        options.populate = ['client', 'meter', 'tariff']
+        options.populate = ['client', 'meter', {path: 'tariff', strictPopulate: false, select: 'fixedCharge name valuePerm3 status'}]
         return await AccountModel.paginate(query, options)
     }
 }

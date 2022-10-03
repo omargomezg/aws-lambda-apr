@@ -14,7 +14,7 @@ const clientSchema = new mongoose.Schema(
         email: { type: String },
         occupation: { type: String },
         status: { type: String },
-        nationality: { type: String },
+        nationality: { type: String }
     },
     {
         timestamps: true,

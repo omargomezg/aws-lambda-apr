@@ -1,0 +1,38 @@
+{
+  "create": {
+    "body": {
+      "accountNumber": "78100-test",
+      "sector": "",
+      "address": "n/a",
+      "client": {
+        "_id": "6320958d58fcc61f55abfed9",
+        "dni": "75279868",
+        "dniType": "CHILEAN",
+        "names": "LUCIA TOLOSA MONJE",
+        "middleName": "",
+        "lastName": "",
+        "personality": "NATURAL_PERSONALITY",
+        "birthDate": null,
+        "telephone": "",
+        "email": "",
+        "occupation": "",
+        "status": "ENABLED",
+        "nationality": "CHILE",
+        "createdAt": "2022-09-13T14:37:01.140Z",
+        "updatedAt": "2022-09-13T14:37:01.140Z",
+        "__v": 0
+      },
+      "meter": {
+        "_id": "6320958c58fcc61f55abfed6",
+        "serial": "78100",
+        "createdAt": "2022-09-13T14:37:00.829Z",
+        "updatedAt": "2022-09-13T14:37:00.829Z",
+        "__v": 0
+      },
+      "readingHistory": [],
+      "createdAt": "2022-09-13T14:37:02.260Z",
+      "updatedAt": "2022-09-13T14:37:02.260Z",
+      "__v": 0
+    }
+  }
+}

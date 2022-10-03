@@ -1,0 +1,11 @@
+{
+  "createOne": {
+    "body": {
+      "_id": 0,
+      "name": "gy",
+      "fixedCharge": "0656",
+      "valuePerm3": "076",
+      "status": true
+    }
+  }
+}
