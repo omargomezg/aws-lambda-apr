@@ -3,44 +3,25 @@ const MeterModel = require('../model/meter')
 const AccountModel = require('../model/account')
 const ClientModel = require('../model/client')
 const TariffModel = require('../model/tariff')
-const {handlePagination} = require("../utils");
+const { handlePagination } = require('../utils')
 
-class TariffService {
-    constructor() {}
-
-    async getAll(requestParams) {
-        await connectToDatabase()
-        return await TariffModel.paginate(
-            {},
-            handlePagination.getPagination(requestParams)
-        )
+class PeriodService {
+    constructor() {
     }
 
-    async create(tariff) {
+    async create(account) {
         await connectToDatabase()
-        return await new TariffModel({
-            name: tariff.name,
-            fixedCharge: tariff.fixedCharge,
-            valuePerm3: tariff.valuePerm3,
-            status: tariff.status
-        }).save()
+        return await new AccountModel(account).save()
     }
 
-    async update(tariff) {
+    async update(account) {
         await connectToDatabase()
-        const tariffDocument = await TariffModel.findById(tariff._id);
-        tariffDocument.name = tariff.name;
-        tariffDocument.fixedCharge = tariff.fixedCharge;
-        tariffDocument.valuePerm3 = tariff.valuePerm3;
-        return await tariffDocument.save();
+        const query = {_id: account._id}
+        return await AccountModel.findOneAndUpdate(query, account, {new: true})
+
     }
 
-    async delete(_id) {
-        await connectToDatabase()
-        return await TariffModel.deleteOne({_id});
-    }
-
-    async createback(client) {
+    async createAccountByMeter(client) {
         await connectToDatabase()
         const result = []
         const tariffDocument = await TariffModel.findOne()
@@ -76,6 +57,38 @@ class TariffService {
         }
         return result
     }
+
+    async getAll(requestParams) {
+        await connectToDatabase()
+        const {_id} = requestParams
+        const options = handlePagination.getPagination(requestParams);
+        let query = {}
+        if (_id)
+            query._id = _id
+        options.populate = ['client', 'meter', {path: 'tariff', strictPopulate: false, select: 'fixedCharge name valuePerm3 status'}]
+        return await AccountModel.paginate(query, options)
+    }
 }
 
-module.exports = TariffService
+function parseClient(client) {
+    const name = client.names === '' ? client.fullName : client.names
+    const newclient = {
+        dni: client.dni,
+        dniType: client.dniType ? client.dniType : 'RUT',
+        names: client.businessName ? client.businessName : name,
+        middleName: client.middleName ? client.middleName : '',
+        lastName: client.lastName ? client.lastName : '',
+        personality: client.businessName
+            ? 'LEGAL_PERSONALITY'
+            : 'NATURAL_PERSONALITY',
+        birthDate: client.birthDate ? client.birthDate : '',
+        telephone: client.telephone ? client.telephone : '',
+        email: client.email ? client.email : '',
+        occupation: client.profession ? client.profession : '',
+        status: 'ENABLED',
+        nationality: 'CHILE',
+    }
+    return newclient
+}
+
+module.exports = AccountService

@@ -16,87 +16,122 @@ provider:
     region: us-east-1
 
 functions:
-    createMeter:
-        handler: app/index.meterCreate
-        events:
-            - http:
-                  path: meter
-                  method: post
-                  cors: true
-    updateMeter:
-        handler: app/index.meterUpdate
-        events:
-            - http:
-                  path: meter/{id}
-                  method: put
-                  cors: true
-    getAllMeters:
-        handler: app/index.meterGetAll
-        events:
-            - http:
-                  path: meter
-                  method: get
-                  cors: true
-    getAllClients:
-        handler: app/index.clientGetAll
-        events:
-            - http:
-                  path: client
-                  method: get
-                  cors: true
-    createClient:
-        handler: app/index.clientCreate
-        events:
-            - http:
-                  path: client
-                  method: post
-                  cors: true
-    createAccountByMeter:
-        handler: app/index.accountCreateByMeter
-        events:
-            - http:
-                  path: account-by-meter
-                  method: post
-                  cors: true
-    tariffGet:
-      handler: app/handle/tariff.getAll
+  createMeter:
+    handler: app/index.meterCreate
+    events:
+      - http:
+          path: meter
+          method: post
+          cors: true
+  updateMeter:
+    handler: app/index.meterUpdate
+    events:
+      - http:
+          path: meter/{id}
+          method: put
+          cors: true
+  getAllMeters:
+    handler: app/index.meterGetAll
+    events:
+      - http:
+          path: meter
+          method: get
+          cors: true
+  getAllClients:
+    handler: app/index.clientGetAll
+    events:
+      - http:
+          path: client
+          method: get
+          cors: true
+  clientCreate:
+    handler: app/handle/client.createClient
+    events:
+      - http:
+          path: client
+          method: post
+          cors: true
+  clientUpdate:
+    handler: app/handle/client.updateClient
+    events:
+      - http:
+          path: client
+          method: put
+          cors: true
+  createAccountByMeter:
+    handler: app/index.accountCreateByMeter
+    events:
+      - http:
+          path: account-by-meter
+          method: post
+          cors: true
+  tariffGet:
+    handler: app/handle/tariff.get
+    events:
+      - http:
+          path: tariff
+          method: get
+          cors: true
+  tariffPost:
+    handler: app/handle/tariff.post
+    events:
+      - http:
+          path: tariff
+          method: post
+          cors: true
+  tariffPut:
+    handler: app/handle/tariff.put
+    events:
+      - http:
+          path: tariff
+          method: put
+          cors: true
+  tariffDelete:
+    handler: app/handle/tariff.delete
+    events:
+      - http:
+          path: tariff
+          method: delete
+          cors: true
+  testRequest:
+    handler: app/index.test
+    events:
+      - http:
+          path: test
+          method: get
+          cors: true
+  accountPut:
+    handler: app/handle/account.update
+    events:
+      - http:
+          path: account
+          method: put
+          cors: true
+  accountPost:
+    handler: app/handle/account.create
+    events:
+      - http:
+          path: account
+          method: post
+          cors: true
+  accountGetAll:
+    handler: app/handle/account.getAll
+    events:
+      - http:
+          path: account
+          method: get
+          cors: true
+    userByEmail:
+      handler: app/handle/user.getByEmail
       events:
         - http:
-            path: tariff
+            path: user
             method: get
             cors: true
-    createTariff:
-        handler: app/index.tariffCreate
-        events:
-            - http:
-                  path: tariff
-                  method: post
-                  cors: true
-    testRequest:
-        handler: app/index.test
-        events:
-            - http:
-                  path: test
-                  method: get
-                  cors: true
-    accountGetAll:
-        handler: app/handle/account.getAll
-        events:
-            - http:
-                  path: account
-                  method: get
-                  cors: true
-    userByEmail:
-        handler: app/handle/user.getByEmail
-        events:
-            - http:
-                path: user
-                method: get
-                cors: true
     userCreate:
-        handler: app/handle/user.create
-        events:
-            - http:
-                path: user
-                method: post
-                cors: true
+      handler: app/handle/user.create
+      events:
+        - http:
+            path: user
+            method: post
+            cors: true
