@@ -15,4 +15,4 @@ const tariffSchema = new mongoose.Schema(
 
 tariffSchema.plugin(mongoosePaginate)
 
-module.exports = mongoose.model('tariffs', tariffSchema)
+module.exports = mongoose.model('tariff', tariffSchema)
