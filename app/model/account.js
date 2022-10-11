@@ -10,7 +10,7 @@ const accountSchema = new mongoose.Schema(
         document: {type: String},
         client: {type: Schema.ObjectId, ref: 'client'},
         meter: {type: Schema.ObjectId, ref: 'meter'},
-        tariff: {type: Schema.ObjectId, ref: 'tariffs'},
+        tariff: {type: Schema.ObjectId, ref: 'tariff'},
         readingHistory: [
             {
                 period: {type: Schema.ObjectId, ref: 'period'},

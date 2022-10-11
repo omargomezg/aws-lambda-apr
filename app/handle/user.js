@@ -3,9 +3,9 @@ const UserService = require('../service/user')
 
 const userService = new UserService();
 
-module.exports.getByEmail = async (event, context) => {
+module.exports.getAll = async (event, context) => {
     try {
-        const result = await userService.getByEmail(event.queryStringParameters.email)
+        const result = await userService.getAll(event.queryStringParameters)
         return handleResponse.handleSuccess(result, 200)
     } catch (err) {
         console.log(err)

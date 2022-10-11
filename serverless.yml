@@ -121,17 +121,17 @@ functions:
           path: account
           method: get
           cors: true
-    userByEmail:
-      handler: app/handle/user.getByEmail
-      events:
-        - http:
-            path: user
-            method: get
-            cors: true
-    userCreate:
-      handler: app/handle/user.create
-      events:
-        - http:
-            path: user
-            method: post
-            cors: true
+  userGetAll:
+    handler: app/handle/user.getAll
+    events:
+      - http:
+          path: user
+          method: get
+          cors: true
+  userCreate:
+    handler: app/handle/user.create
+    events:
+      - http:
+          path: user
+          method: post
+          cors: true

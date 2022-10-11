@@ -6,9 +6,12 @@ class UserService {
     constructor() {
     }
 
-    async getByEmail(email) {
+    async getAll(query) {
         await connectToDatabase()
-        const user = await UserModel.findOne({email: email});
+        const options = handlePagination.getPagination(query);
+        delete query.page;
+        delete query.limit;
+        const user = await UserModel.paginate(query, options);
         return user;
     }
 
