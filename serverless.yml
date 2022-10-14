@@ -93,13 +93,6 @@ functions:
           path: tariff
           method: delete
           cors: true
-  testRequest:
-    handler: app/index.test
-    events:
-      - http:
-          path: test
-          method: get
-          cors: true
   accountPut:
     handler: app/handle/account.update
     events:

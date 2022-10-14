@@ -58,13 +58,11 @@ class AccountService {
         return result
     }
 
-    async getAll(requestParams) {
+    async getAll(query) {
         await connectToDatabase()
-        const {_id} = requestParams
-        const options = handlePagination.getPagination(requestParams);
-        let query = {}
-        if (_id)
-            query._id = _id
+        const options = handlePagination.getPagination(query);
+        delete query.limit;
+        delete query.page;
         options.populate = ['client', 'meter', {path: 'tariff', strictPopulate: false, select: 'fixedCharge name valuePerm3 status'}]
         return await AccountModel.paginate(query, options)
     }
