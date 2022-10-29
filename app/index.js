@@ -25,7 +25,7 @@ module.exports.meterCreate = async (event, context) => {
 
 module.exports.meterGetAll = async (event, context) => {
     try {
-        const result = await meterService.getAll(event.queryStringParameters)
+        const result = await meterService.getAll(event.queryStringParameters ? event.queryStringParameters : {})
         return handleResponse.handleSuccess(result, 200)
     } catch (err) {
         console.log(err)
@@ -83,14 +83,4 @@ module.exports.tariffCreate = async (event, context) => {
             }),
         }
     }
-}
-
-module.exports.test = async (event, context) => {
-    return handleResponse.handleSuccess(
-        {
-            event,
-            context,
-        },
-        200
-    )
 }

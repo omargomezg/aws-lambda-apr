@@ -4,7 +4,7 @@ const requestClient = require('./mocks/client.json')
 const requestClientAccount = require('./mocks/accountByClient.json')
 
 describe('Create meter', () => {
-    it('should be create a meter', async () => {
+    test('should be create a meter', async () => {
         const result = await index.meterCreate({
             body: JSON.stringify(request.create.body),
         })
@@ -20,9 +20,10 @@ describe('Create meter', () => {
 
 describe('Get meters', () => {
     it('Get all', async () => {
-        const result = await index.meterGetAll()
+        const result = await index.meterGetAll({})
         const body = JSON.parse(result.body)
-        expect(body.totalDocs).toEqual(10)
+        expect(body.limit).toEqual(25)
+        expect(body.page).toEqual(1)
     })
 })
 

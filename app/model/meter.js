@@ -3,7 +3,9 @@ const mongoosePaginate = require('mongoose-paginate-v2')
 
 const meterSchema = new mongoose.Schema(
     {
-        serial: { type: String, required: true },
+        serial: {type: String, required: true},
+        trademark: {type: String},
+        diameter: {type: Number}
     },
     {
         timestamps: true,

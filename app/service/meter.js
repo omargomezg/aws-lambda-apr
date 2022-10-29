@@ -1,30 +1,32 @@
 const MeterModel = require('../model/meter')
 const connectToDatabase = require('../model/db')
-const { handlePagination } = require('../utils')
+const {handlePagination} = require('../utils')
+const {client} = require("../model");
 
-class meterService {
-    constructor() {}
+class MeterService {
+    constructor() {
+    }
 
-    async getAll(requestParams) {
+    async getAll(query) {
         await connectToDatabase()
-        return await MeterModel.paginate(
-            {},
-            handlePagination.getPagination(requestParams)
-        )
+        const options = handlePagination.getPagination(query);
+        delete query.limit;
+        delete query.page;
+        return await MeterModel.paginate(query, options)
     }
 
     async create(meter) {
         await connectToDatabase()
-        return await new MeterModel({ serial: meter.serial }).save()
+        return await new MeterModel({serial: meter.serial}).save()
     }
 
-    async update(body, _id) {
+    async update(body) {
         await connectToDatabase()
-        const result = await MeterModel.findOneAndUpdate(_id, body, {
+        const result = await MeterModel.findOneAndUpdate({_id: client._id}, body, {
             new: true,
         })
         return result
     }
 }
 
-module.exports = meterService
+module.exports = MeterService
