@@ -3,7 +3,7 @@ const MeterModel = require('../model/meter')
 const AccountModel = require('../model/account')
 const ClientModel = require('../model/client')
 const TariffModel = require('../model/tariff')
-const { handlePagination } = require('../utils')
+const {handlePagination} = require('../utils')
 
 class AccountService {
     constructor() {
@@ -35,7 +35,7 @@ class AccountService {
                     serial: client.waterMeters[i].serial,
                 }).save()
             }
-            let clientDocument = await ClientModel.findOne({ dni: client.dni })
+            let clientDocument = await ClientModel.findOne({dni: client.dni})
             if (!clientDocument) {
                 clientDocument = await new ClientModel(
                     parseClient(client)
@@ -63,8 +63,24 @@ class AccountService {
         const options = handlePagination.getPagination(query);
         delete query.limit;
         delete query.page;
-        options.populate = ['client', 'meter', {path: 'tariff', strictPopulate: false, select: 'fixedCharge name valuePerm3 status'}]
+        options.populate = ['client', 'meter', {
+            path: 'tariff',
+            strictPopulate: false,
+            select: 'fixedCharge name valuePerm3 status'
+        }]
         return await AccountModel.paginate(query, options)
+    }
+
+    async meterInAccount(query) {await connectToDatabase()
+        const options = handlePagination.getPagination(query);
+        delete query.limit;
+        delete query.page;
+        options.populate = ['client', 'meter', {
+            path: 'tariff',
+            strictPopulate: false,
+            select: 'fixedCharge name valuePerm3 status'
+        }]
+        return await AccountModel.paginate({'meter.serial': query.serial}, options)
     }
 }
 

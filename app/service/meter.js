@@ -1,6 +1,7 @@
 const MeterModel = require('../model/meter')
 const connectToDatabase = require('../model/db')
 const {handlePagination} = require('../utils')
+const {client} = require("../model");
 
 class MeterService {
     constructor() {
@@ -19,9 +20,9 @@ class MeterService {
         return await new MeterModel({serial: meter.serial}).save()
     }
 
-    async update(body, _id) {
+    async update(body) {
         await connectToDatabase()
-        const result = await MeterModel.findOneAndUpdate(_id, body, {
+        const result = await MeterModel.findOneAndUpdate({_id: client._id}, body, {
             new: true,
         })
         return result

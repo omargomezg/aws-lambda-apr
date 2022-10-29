@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const mongoosePaginate = require('mongoose-paginate-v2')
 
-const clientSchema = new mongoose.Schema(
+const configurationSchema = new mongoose.Schema(
     {
         dni: { type: String, required: true },
     },
@@ -10,6 +10,6 @@ const clientSchema = new mongoose.Schema(
     }
 )
 
-clientSchema.plugin(mongoosePaginate)
+configurationSchema.plugin(mongoosePaginate)
 
-module.exports = mongoose.model('client', clientSchema)
+module.exports = mongoose.model('configuration', configurationSchema)

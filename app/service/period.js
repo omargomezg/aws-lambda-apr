@@ -1,8 +1,5 @@
 const connectToDatabase = require('../model/db')
-const MeterModel = require('../model/meter')
-const AccountModel = require('../model/account')
-const ClientModel = require('../model/client')
-const TariffModel = require('../model/tariff')
+const PeriodModel = require('../model/period')
 const { handlePagination } = require('../utils')
 
 class PeriodService {
@@ -11,14 +8,14 @@ class PeriodService {
 
     async create(account) {
         await connectToDatabase()
-        return await new AccountModel(account).save()
+        return await new PeriodModel(account).save()
     }
 
-    async update(account) {
+    async update(period) {
         await connectToDatabase()
-        const query = {_id: account._id}
-        return await AccountModel.findOneAndUpdate(query, account, {new: true})
-
+        const query = {_id: period._id}
+        const periodUpdated = await PeriodModel.findOneAndUpdate(query, period, {new: true})
+        return periodUpdated;
     }
 
     async createAccountByMeter(client) {
@@ -41,11 +38,11 @@ class PeriodService {
                     parseClient(client)
                 ).save()
             }
-            const accountDocument = await AccountModel.findOne({
+            const accountDocument = await PeriodModel.findOne({
                 accountNumber: meterDocument.serial,
             })
             if (!accountDocument) {
-                const newAccount = await new AccountModel({
+                const newAccount = await new PeriodModel({
                     accountNumber: meterDocument.serial,
                     sector: '',
                     address: 'n/a',
@@ -58,15 +55,12 @@ class PeriodService {
         return result
     }
 
-    async getAll(requestParams) {
+    async getAll(query) {
         await connectToDatabase()
-        const {_id} = requestParams
-        const options = handlePagination.getPagination(requestParams);
-        let query = {}
-        if (_id)
-            query._id = _id
-        options.populate = ['client', 'meter', {path: 'tariff', strictPopulate: false, select: 'fixedCharge name valuePerm3 status'}]
-        return await AccountModel.paginate(query, options)
+        const options = handlePagination.getPagination(query);
+        delete query.limit;
+        delete query.page;
+        return await PeriodModel.paginate(query, options)
     }
 }
 
@@ -91,4 +85,4 @@ function parseClient(client) {
     return newclient
 }
 
-module.exports = AccountService
+module.exports = PeriodService;
